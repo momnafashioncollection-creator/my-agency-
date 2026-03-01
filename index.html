@@ -594,8 +594,8 @@
         lucide.createIcons();
         AOS.init({ duration: 800, once: true, offset: 50, easing: 'ease-in-out' });
 
-        // --- UPDATED ROUTING SYSTEM ---
-        function navigate(pageId, pushToHistory = true) {
+        // --- UPDATED ROUTING SYSTEM WITH CUSTOM SLUGS ---
+        function navigate(pageId, pushToHistory = true, customHash = null) {
             // Hide all sections
             document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
             // Remove active states
@@ -608,20 +608,31 @@
                 document.querySelectorAll(`button[onclick="navigate('${pageId}')"].nav-link`).forEach(link => link.classList.add('active'));
             }
 
-            // Push the URL to the browser bar without reloading the page!
+            // Push the custom clean URL (slug) or the standard section ID to the browser bar
             if (pushToHistory) {
-                window.history.pushState({ pageId: pageId }, "", `#${pageId}`);
+                const hashUrl = customHash ? `#${customHash}` : `#${pageId}`;
+                window.history.pushState({ pageId: pageId }, "", hashUrl);
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => { AOS.refresh(); }, 100);
         }
 
-        // Listen for browser Back/Forward buttons
+        // Listen for browser Back/Forward buttons and direct links
         window.addEventListener('popstate', (event) => {
             const hash = window.location.hash.substring(1);
-            if (hash === 'single-post') {
-                navigate('blog', false); // Always send to main blog list if they hit back on an article
+            
+            if (hash.startsWith('post/')) {
+                const slug = hash.replace('post/', '');
+                // Find the post index matching the slug in the URL
+                const postIndex = globalPosts.findIndex(p => p.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') === slug);
+                if (postIndex !== -1) {
+                    viewPost(postIndex, false);
+                } else {
+                    navigate('blog', false);
+                }
+            } else if (hash === 'single-post') {
+                navigate('blog', false); // Always send to main blog list if they somehow hit the raw template
             } else if (hash && document.getElementById(hash)) {
                 navigate(hash, false);
             } else {
@@ -655,10 +666,18 @@
             }
             renderBlogGrid();
 
-            // When page first loads, check if there's a URL hash to route to directly
+            // When page first loads, check if there's a URL hash to route to an article directly!
             const hash = window.location.hash.substring(1);
-            if (hash === 'single-post') {
-                navigate('blog', false); // Route to main blog if trying to access single post directly
+            if (hash.startsWith('post/')) {
+                const slug = hash.replace('post/', '');
+                const postIndex = globalPosts.findIndex(p => p.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') === slug);
+                if (postIndex !== -1) {
+                    viewPost(postIndex, false);
+                } else {
+                    navigate('blog', false);
+                }
+            } else if (hash === 'single-post') {
+                navigate('blog', false);
             } else if (hash && document.getElementById(hash)) {
                 navigate(hash, false);
             }
@@ -689,7 +708,7 @@
             lucide.createIcons();
         }
 
-        function viewPost(index) {
+        function viewPost(index, pushToHistory = true) {
             const post = globalPosts[index];
             const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
             
@@ -698,7 +717,11 @@
             document.getElementById('post-image').src = post.image;
             document.getElementById('post-body').innerHTML = marked.parse(post.content);
 
-            navigate('single-post');
+            // Generate an SEO-friendly slug from the title (e.g. "My Blog Post!" -> "my-blog-post")
+            const slug = post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+            
+            // Navigate and push the beautiful custom slug to the URL
+            navigate('single-post', pushToHistory, `post/${slug}`);
         }
 
         window.addEventListener('DOMContentLoaded', initBlog);
