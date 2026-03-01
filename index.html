@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Digital | Marketing Agency</title>
+    <!-- Tailwind CSS with Typography Plugin for beautiful blog posts -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Netlify Identity Widget (Required for CMS Login) -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Marked.js for parsing Markdown to HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom utilities */
+        .page-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .page-section.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .nav-link.active { color: #4f46e5; font-weight: 600; }
+        /* Smooth AOS fix for hidden sections */
+        [data-aos] { transition-property: transform, opacity; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center cursor-pointer" onclick="navigate('home')">
+                    <i data-lucide="trending-up" class="h-8 w-8 text-brand-600 mr-2 transition-transform duration-300 hover:scale-110"></i>
+                    <span class="font-bold text-2xl tracking-tight text-gray-900">Apex<span class="text-brand-600">Digital</span></span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <button onclick="navigate('home')" class="nav-link active text-gray-600 hover:text-brand-600 transition">Home</button>
+                    <button onclick="navigate('services')" class="nav-link text-gray-600 hover:text-brand-600 transition">Services</button>
+                    <button onclick="navigate('about')" class="nav-link text-gray-600 hover:text-brand-600 transition">About Us</button>
+                    <button onclick="navigate('portfolio')" class="nav-link text-gray-600 hover:text-brand-600 transition">Portfolio</button>
+                    <button onclick="navigate('blog')" class="nav-link text-gray-600 hover:text-brand-600 transition">Insights</button>
+                    <button onclick="navigate('contact')" class="bg-brand-600 text-white px-5 py-2.5 rounded-full font-semibold hover:bg-brand-700 hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-brand-500/30">Get a Proposal</button>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 pb-4">
+            <div class="flex flex-col space-y-3 px-4 pt-3">
+                <button onclick="navigate('home'); toggleMobileMenu()" class="text-left text-gray-600 font-medium">Home</button>
+                <button onclick="navigate('services'); toggleMobileMenu()" class="text-left text-gray-600 font-medium">Services</button>
+                <button onclick="navigate('about'); toggleMobileMenu()" class="text-left text-gray-600 font-medium">About Us</button>
+                <button onclick="navigate('portfolio'); toggleMobileMenu()" class="text-left text-gray-600 font-medium">Portfolio</button>
+                <button onclick="navigate('blog'); toggleMobileMenu()" class="text-left text-gray-600 font-medium">Insights</button>
+                <button onclick="navigate('contact'); toggleMobileMenu()" class="text-left text-brand-600 font-bold">Contact</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow overflow-hidden">
+
+        <!-- 1. HOME PAGE -->
+        <section id="home" class="page-section active">
+            <!-- Hero -->
+            <div class="relative bg-white overflow-hidden">
+                <div class="max-w-7xl mx-auto">
+                    <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-20">
+                        <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+                            <div class="sm:text-center lg:text-left">
+                                <span data-aos="fade-up" class="inline-block py-1 px-3 rounded-full bg-brand-50 text-brand-600 text-sm font-semibold mb-4 border border-brand-100">Voted #1 ROI Agency 2025</span>
+                                <h1 data-aos="fade-up" data-aos-delay="100" class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                                    <span class="block xl:inline">Dominate your</span>
+                                    <span class="block text-brand-600 xl:inline">digital landscape.</span>
+                                </h1>
+                                <p data-aos="fade-up" data-aos-delay="200" class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                                    We engineer data-driven digital marketing campaigns that multiply your revenue, scale your brand, and crush your competition.
+                                </p>
+                                <div data-aos="fade-up" data-aos-delay="300" class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                                    <div class="rounded-md shadow">
+                                        <button onclick="navigate('contact')" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 hover:-translate-y-1 md:py-4 md:text-lg md:px-10 transition-all duration-300">
+                                            Start Scaling
+                                        </button>
+                                    </div>
+                                    <div class="mt-3 sm:mt-0 sm:ml-3">
+                                        <button onclick="navigate('portfolio')" class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 hover:-translate-y-1 md:py-4 md:text-lg md:px-10 transition-all duration-300">
+                                            View Case Studies
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+                <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-gray-50" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
+                    <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full shadow-2xl" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Confident digital marketing professional">
+                </div>
+            </div>
+
+            <!-- Trusted By -->
+            <div class="bg-brand-900 py-10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <p data-aos="fade-up" class="text-center text-sm font-semibold uppercase text-brand-100 tracking-wide">Trusted by innovative companies worldwide</p>
+                    <div class="mt-6 grid grid-cols-2 gap-8 md:grid-cols-5 opacity-70">
+                        <div data-aos="fade-up" data-aos-delay="100" class="col-span-1 flex justify-center items-center text-white"><i data-lucide="framer" class="h-8 w-8 mr-2"></i> <span class="text-xl font-bold">Acme Corp</span></div>
+                        <div data-aos="fade-up" data-aos-delay="200" class="col-span-1 flex justify-center items-center text-white"><i data-lucide="hexagon" class="h-8 w-8 mr-2"></i> <span class="text-xl font-bold">Hexagon</span></div>
+                        <div data-aos="fade-up" data-aos-delay="300" class="col-span-1 flex justify-center items-center text-white"><i data-lucide="box" class="h-8 w-8 mr-2"></i> <span class="text-xl font-bold">Boxy</span></div>
+                        <div data-aos="fade-up" data-aos-delay="400" class="col-span-1 flex justify-center items-center text-white"><i data-lucide="triangle" class="h-8 w-8 mr-2"></i> <span class="text-xl font-bold">Triad</span></div>
+                        <div data-aos="fade-up" data-aos-delay="500" class="col-span-1 flex justify-center items-center text-white"><i data-lucide="aperture" class="h-8 w-8 mr-2"></i> <span class="text-xl font-bold">Aperture</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Apex Advantage -->
+            <div class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16" data-aos="fade-up">
+                        <h2 class="text-base text-brand-600 font-semibold tracking-wide uppercase">Why Choose Us</h2>
+                        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                            The Apex Advantage
+                        </p>
+                        <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                            We don't just guess. We use data, proven frameworks, and relentless testing to guarantee your growth.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                        <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                            <div class="w-16 h-16 mx-auto bg-brand-50 rounded-2xl flex items-center justify-center mb-6 transform rotate-3 transition-transform duration-300 hover:rotate-6 hover:scale-110">
+                                <i data-lucide="line-chart" class="h-8 w-8 text-brand-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Data-Driven ROI</h3>
+                            <p class="text-gray-600">Every decision we make is backed by hard data, ensuring your budget is optimized for maximum returns.</p>
+                        </div>
+                        <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                            <div class="w-16 h-16 mx-auto bg-blue-50 rounded-2xl flex items-center justify-center mb-6 transform -rotate-3 transition-transform duration-300 hover:-rotate-6 hover:scale-110">
+                                <i data-lucide="shield-check" class="h-8 w-8 text-blue-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Elite Specialists</h3>
+                            <p class="text-gray-600">You don't get handed off to an intern. Your campaigns are managed by senior marketers with years of experience.</p>
+                        </div>
+                        <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                            <div class="w-16 h-16 mx-auto bg-purple-50 rounded-2xl flex items-center justify-center mb-6 transform rotate-3 transition-transform duration-300 hover:rotate-6 hover:scale-110">
+                                <i data-lucide="clock" class="h-8 w-8 text-purple-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Radical Transparency</h3>
+                            <p class="text-gray-600">Access your live dashboard 24/7. Know exactly where your money is going and what it's generating.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Capabilities (Bento Box Layout) -->
+            <div class="py-24 bg-gray-50 border-y border-gray-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16" data-aos="fade-up">
+                        <h2 class="text-base text-brand-600 font-semibold tracking-wide uppercase">Core Capabilities</h2>
+                        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                            Everything you need to scale.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Large Feature Card -->
+                        <div data-aos="fade-right" data-aos-delay="100" class="md:col-span-2 bg-white rounded-3xl p-8 sm:p-10 shadow-sm border border-gray-100 flex flex-col justify-center overflow-hidden relative group hover:shadow-md transition-shadow duration-300">
+                            <div class="absolute top-0 right-0 -mr-8 -mt-8 w-64 h-64 rounded-full bg-brand-50 opacity-50 group-hover:scale-110 transition-transform duration-700"></div>
+                            <div class="relative z-10">
+                                <div class="w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center mb-6">
+                                    <i data-lucide="bar-chart-2" class="h-8 w-8 text-brand-600"></i>
+                                </div>
+                                <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Performance Marketing</h3>
+                                <p class="text-gray-600 max-w-lg text-lg leading-relaxed">We don't guess. We deploy millions in ad spend across Google, Meta, and TikTok using advanced algorithmic bidding and rigorous creative testing to guarantee your return on investment.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Small Feature Card 1 -->
+                        <div data-aos="fade-left" data-aos-delay="200" class="bg-brand-900 text-white rounded-3xl p-8 sm:p-10 shadow-sm flex flex-col justify-center hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden group">
+                            <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-125 transition-transform duration-500">
+                                <i data-lucide="search" class="w-40 h-40"></i>
+                            </div>
+                            <div class="relative z-10">
+                                <i data-lucide="search" class="h-10 w-10 text-brand-400 mb-5"></i>
+                                <h3 class="text-xl font-bold mb-3">SEO Dominance</h3>
+                                <p class="text-brand-100 text-sm leading-relaxed">Capture high-intent organic traffic that converts passively while lowering your overall blended acquisition costs.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Small Feature Card 2 -->
+                        <div data-aos="fade-right" data-aos-delay="300" class="bg-white rounded-3xl p-8 sm:p-10 shadow-sm border border-gray-100 flex flex-col justify-center hover:-translate-y-1 transition-transform duration-300">
+                            <i data-lucide="pen-tool" class="h-10 w-10 text-brand-600 mb-5"></i>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Conversion Design</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">We architect and build high-converting landing pages and funnels that turn your hard-earned clicks into loyal customers.</p>
+                        </div>
+                        
+                        <!-- Medium CTA Card -->
+                        <div data-aos="fade-left" data-aos-delay="400" class="md:col-span-2 bg-gray-900 text-white rounded-3xl p-8 sm:p-10 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between border border-gray-800">
+                            <div class="mb-6 sm:mb-0 sm:mr-6">
+                                <h3 class="text-2xl font-bold mb-2">Ready to dominate your market?</h3>
+                                <p class="text-gray-400">Get a custom growth strategy blueprint within 24 hours.</p>
+                            </div>
+                            <button onclick="navigate('contact')" class="whitespace-nowrap bg-brand-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-500 transition-colors shadow-lg shadow-brand-500/25 flex items-center group">
+                                Claim Free Audit
+                                <i data-lucide="arrow-right" class="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 data-aos="fade-up" class="text-3xl font-extrabold text-center text-gray-900 mb-16">What Our Partners Say</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Review 1 -->
+                        <div data-aos="fade-right" data-aos-delay="100" class="bg-brand-50 rounded-2xl p-8 border border-brand-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                            <div class="flex text-brand-500 mb-4">
+                                <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                                <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                                <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                                <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                                <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                            </div>
+                            <p class="text-gray-700 italic mb-6">"Apex completely transformed our lead generation. We were struggling to get quality leads under $50, and within 3 months, they brought our CPA down to $18 while tripling our volume."</p>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-brand-200 rounded-full flex items-center justify-center text-brand-700 font-bold text-xl mr-4">SJ</div>
+                                <div>
+                                    <p class="font-bold text-gray-900">Sarah Jenkins</p>
+                                    <p class="text-sm text-gray-500">CMO, TechFlow Solutions</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Review 2 -->
+                        <div data-aos="fade-left" data-aos-delay="200" class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                            <div class="flex text-brand-500 mb-4">
+                                <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                                <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                                <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                                <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                                <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                            </div>
+                            <p class="text-gray-700 italic mb-6">"I've worked with 4 different agencies before finding Apex. They are the only ones who actually treated our budget like it was their own money. The transparency and results are unmatched."</p>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-700 font-bold text-xl mr-4">MR</div>
+                                <div>
+                                    <p class="font-bold text-gray-900">Michael Ross</p>
+                                    <p class="text-sm text-gray-500">Founder, Elevated E-Com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SERVICES PAGE -->
+        <section id="services" class="page-section bg-gray-50 py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center" data-aos="fade-up">
+                    <h2 class="text-base text-brand-600 font-semibold tracking-wide uppercase">Capabilities</h2>
+                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                        Comprehensive Marketing Solutions
+                    </p>
+                    <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                        We provide end-to-end digital marketing services tailored to your specific growth goals.
+                    </p>
+                </div>
+
+                <div class="mt-16">
+                    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                        <!-- Service 1 -->
+                        <div data-aos="fade-up" data-aos-delay="100" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-lg bg-brand-50 flex items-center justify-center mb-6">
+                                <i data-lucide="search" class="h-7 w-7 text-brand-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">SEO Optimization</h3>
+                            <p class="text-gray-600 mb-4">Dominate search rankings with our technical, on-page, and off-page SEO strategies. Drive organic traffic that converts.</p>
+                            <ul class="text-sm text-gray-500 space-y-2">
+                                <li class="flex items-center"><i data-lucide="check" class="h-4 w-4 text-brand-500 mr-2"></i> Keyword Strategy</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-4 w-4 text-brand-500 mr-2"></i> Technical Audits</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-4 w-4 text-brand-500 mr-2"></i> Link Building</li>
+                            </ul>
+                        </div>
+
+                        <!-- Service 2 -->
+                        <div data-aos="fade-up" data-aos-delay="200" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-lg bg-blue-50 flex items-center justify-center mb-6">
+                                <i data-lucide="mouse-pointer-click" class="h-7 w-7 text-blue-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Pay-Per-Click (PPC)</h3>
+                            <p class="text-gray-600 mb-4">Maximize your ROI with hyper-targeted Google and Bing ad campaigns managed by certified experts.</p>
+                            <ul class="text-sm text-gray-500 space-y-2">
+                                <li class="flex items-center"><i data-lucide="check" class="h-4 w-4 text-blue-500 mr-2"></i> Google Ads Management</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-4 w-4 text-blue-500 mr-2"></i> Retargeting Campaigns</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-4 w-4 text-blue-500 mr-2"></i> A/B Testing</li>
+                            </ul>
+                        </div>
+
+                        <!-- Service 3 -->
+                        <div data-aos="fade-up" data-aos-delay="300" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-lg bg-pink-50 flex items-center justify-center mb-6">
+                                <i data-lucide="instagram" class="h-7 w-7 text-pink-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Social Media Mgt</h3>
+                            <p class="text-gray-600 mb-4">Build brand loyalty and community with engaging content across Instagram, LinkedIn, TikTok, and Facebook.</p>
+                            <ul class="text-sm text-gray-500 space-y-2">
+                                <li class="flex items-center"><i data-lucide="check" class="h-4 w-4 text-pink-500 mr-2"></i> Content Creation</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-4 w-4 text-pink-500 mr-2"></i> Community Management</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-4 w-4 text-pink-500 mr-2"></i> Paid Social Ads</li>
+                            </ul>
+                        </div>
+
+                        <!-- Service 4 -->
+                        <div data-aos="fade-up" data-aos-delay="100" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-lg bg-purple-50 flex items-center justify-center mb-6">
+                                <i data-lucide="pen-tool" class="h-7 w-7 text-purple-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Content Marketing</h3>
+                            <p class="text-gray-600 mb-4">Tell your brand story with compelling blogs, whitepapers, and videos that educate and convert.</p>
+                        </div>
+
+                        <!-- Service 5 -->
+                        <div data-aos="fade-up" data-aos-delay="200" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-lg bg-orange-50 flex items-center justify-center mb-6">
+                                <i data-lucide="mail" class="h-7 w-7 text-orange-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Email Automation</h3>
+                            <p class="text-gray-600 mb-4">Nurture leads and increase customer lifetime value with personalized email sequences.</p>
+                        </div>
+
+                        <!-- Service 6 -->
+                        <div data-aos="fade-up" data-aos-delay="300" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                            <div class="w-14 h-14 rounded-lg bg-indigo-50 flex items-center justify-center mb-6">
+                                <i data-lucide="layout" class="h-7 w-7 text-indigo-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">CRO</h3>
+                            <p class="text-gray-600 mb-4">Conversion Rate Optimization turns your existing traffic into more paying customers through UI/UX tweaks.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ABOUT US PAGE -->
+        <section id="about" class="page-section bg-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                    <div data-aos="fade-right">
+                        <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl mb-6">
+                            We don't just run ads.<br>We build <span class="text-brand-600">businesses.</span>
+                        </h2>
+                        <p class="text-lg text-gray-500 mb-6">
+                            Founded in 2018, Apex Digital started with a simple belief: marketing should be an investment, not an expense. We are a team of data scientists, creative writers, and strategy nerds obsessed with ROI.
+                        </p>
+                        <p class="text-lg text-gray-500 mb-8">
+                            We partner with ambitious brands to navigate the complexities of the digital world, ensuring every dollar spent works as hard as you do.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-6 border-t border-gray-100 pt-8">
+                            <div>
+                                <h4 class="text-4xl font-bold text-gray-900 mb-1">50+</h4>
+                                <p class="text-sm text-gray-500">Experts on staff</p>
+                            </div>
+                            <div>
+                                <h4 class="text-4xl font-bold text-gray-900 mb-1">$100M+</h4>
+                                <p class="text-sm text-gray-500">Revenue generated for clients</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 lg:mt-0 relative" data-aos="fade-left" data-aos-delay="200">
+                        <div class="absolute inset-0 bg-brand-100 rounded-3xl transform rotate-3"></div>
+                        <img class="relative rounded-3xl shadow-xl object-cover h-96 w-full" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team working together">
+                    </div>
+                </div>
+
+                <!-- Core Values -->
+                <div class="mt-24">
+                    <h3 data-aos="fade-up" class="text-2xl font-bold text-center text-gray-900 mb-12">Our Core Values</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                        <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                            <div class="mx-auto w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mb-4 transition-transform duration-300 hover:scale-110">
+                                <i data-lucide="activity" class="h-8 w-8 text-brand-600"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Data Over Dogma</h4>
+                            <p class="text-gray-500">We let numbers drive our decisions, not gut feelings. Every campaign is tracked and optimized.</p>
+                        </div>
+                        <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                            <div class="mx-auto w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mb-4 transition-transform duration-300 hover:scale-110">
+                                <i data-lucide="zap" class="h-8 w-8 text-brand-600"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Agile Execution</h4>
+                            <p class="text-gray-500">The digital landscape moves fast. We move faster, adapting strategies in real-time to maximize results.</p>
+                        </div>
+                        <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                            <div class="mx-auto w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mb-4 transition-transform duration-300 hover:scale-110">
+                                <i data-lucide="heart-handshake" class="h-8 w-8 text-brand-600"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Total Transparency</h4>
+                            <p class="text-gray-500">No vanity metrics or confusing reports. Just clear, honest communication about what's working.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. PORTFOLIO / CASE STUDIES -->
+        <section id="portfolio" class="page-section bg-gray-900 py-20 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-base text-brand-400 font-semibold tracking-wide uppercase">Case Studies</h2>
+                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl">
+                        Results that speak for themselves
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Case Study 1 -->
+                    <div data-aos="fade-up" data-aos-delay="100" class="bg-gray-800 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 hover:-translate-y-2 transition duration-300">
+                        <div class="h-48 bg-gradient-to-r from-blue-600 to-indigo-700 relative flex items-center justify-center overflow-hidden">
+                            <i data-lucide="shopping-bag" class="h-16 w-16 text-white opacity-50 absolute transform hover:scale-110 transition duration-500"></i>
+                            <h3 class="text-2xl font-bold z-10">E-Commerce Apparel</h3>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="bg-gray-700 px-3 py-1 rounded-full text-xs font-medium text-gray-300">PPC & Meta Ads</span>
+                                <span class="text-brand-400 font-bold">6 Months</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">Scaling from $50k to $250k/mo</h4>
+                            <p class="text-gray-400 mb-6 text-sm">Restructured their entire ad account, implemented dynamic catalog ads, and optimized checkout flow.</p>
+                            <div class="grid grid-cols-2 gap-4 border-t border-gray-700 pt-4">
+                                <div>
+                                    <p class="text-3xl font-bold text-white">5x</p>
+                                    <p class="text-xs text-gray-400 uppercase tracking-wide">Revenue Growth</p>
+                                </div>
+                                <div>
+                                    <p class="text-3xl font-bold text-brand-400">410%</p>
+                                    <p class="text-xs text-gray-400 uppercase tracking-wide">Return on Ad Spend</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Study 2 -->
+                    <div data-aos="fade-up" data-aos-delay="200" class="bg-gray-800 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 hover:-translate-y-2 transition duration-300">
+                        <div class="h-48 bg-gradient-to-r from-emerald-500 to-teal-700 relative flex items-center justify-center overflow-hidden">
+                            <i data-lucide="building-2" class="h-16 w-16 text-white opacity-50 absolute transform hover:scale-110 transition duration-500"></i>
+                            <h3 class="text-2xl font-bold z-10">B2B SaaS Platform</h3>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="bg-gray-700 px-3 py-1 rounded-full text-xs font-medium text-gray-300">SEO & Content</span>
+                                <span class="text-brand-400 font-bold">12 Months</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">Dominating Non-Branded Search</h4>
+                            <p class="text-gray-400 mb-6 text-sm">Created a robust pillar content strategy and executed a high-authority backlink campaign.</p>
+                            <div class="grid grid-cols-2 gap-4 border-t border-gray-700 pt-4">
+                                <div>
+                                    <p class="text-3xl font-bold text-white">+850%</p>
+                                    <p class="text-xs text-gray-400 uppercase tracking-wide">Organic Traffic</p>
+                                </div>
+                                <div>
+                                    <p class="text-3xl font-bold text-brand-400">-45%</p>
+                                    <p class="text-xs text-gray-400 uppercase tracking-wide">Cost Per Lead</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: INSIGHTS (BLOG) MAIN PAGE -->
+        <section id="blog" class="page-section bg-gray-50 py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-base text-brand-600 font-semibold tracking-wide uppercase">Our Insights</h2>
+                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                        Latest strategies and growth hacks
+                    </p>
+                    <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Read our latest thoughts on digital marketing, SEO, and paid media.</p>
+                </div>
+                
+                <!-- Blog Grid (Populated by JavaScript) -->
+                <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Posts load here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: SINGLE POST READER VIEW -->
+        <section id="single-post" class="page-section bg-white py-20">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <button onclick="navigate('blog')" class="text-brand-600 font-medium mb-8 flex items-center hover:text-brand-800 transition">
+                    <i data-lucide="arrow-left" class="h-4 w-4 mr-2"></i> Back to Insights
+                </button>
+                
+                <div data-aos="fade-up">
+                    <p id="post-date" class="text-brand-600 font-semibold mb-3"></p>
+                    <h1 id="post-title" class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-8 leading-tight"></h1>
+                    <img id="post-image" src="" alt="Featured Image" class="w-full h-80 object-cover rounded-2xl mb-12 shadow-md">
+                    
+                    <!-- Markdown content goes here, styled beautifully by Tailwind Typography -->
+                    <div id="post-body" class="prose prose-lg prose-brand max-w-none text-gray-600">
+                        <!-- Content -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CONTACT PAGE -->
+        <section id="contact" class="page-section bg-white py-20 relative">
+            <div class="absolute inset-0 bg-brand-50 h-1/2"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <!-- Contact Info -->
+                        <div class="bg-brand-900 p-10 lg:p-16 text-white" data-aos="fade-right">
+                            <h3 class="text-3xl font-bold mb-4">Let's talk growth.</h3>
+                            <p class="text-brand-100 mb-10 text-lg">Fill out the form to get a free audit of your current digital marketing strategy.</p>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start transition-transform hover:translate-x-2 duration-300">
+                                    <i data-lucide="map-pin" class="h-6 w-6 text-brand-400 mt-1 mr-4"></i>
+                                    <div>
+                                        <p class="font-bold">Our Headquarters</p>
+                                        <p class="text-brand-200">100 Innovation Drive<br>Suite 400<br>San Francisco, CA 94111</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center transition-transform hover:translate-x-2 duration-300">
+                                    <i data-lucide="phone" class="h-6 w-6 text-brand-400 mr-4"></i>
+                                    <p class="text-brand-200">+1 (555) 123-4567</p>
+                                </div>
+                                <div class="flex items-center transition-transform hover:translate-x-2 duration-300">
+                                    <i data-lucide="mail" class="h-6 w-6 text-brand-400 mr-4"></i>
+                                    <p class="text-brand-200">hello@apexdigital.agency</p>
+                                </div>
+                            </div>
+
+                            <div class="mt-16 flex space-x-4">
+                                <a href="#" class="text-brand-200 hover:text-white transition hover:-translate-y-1 inline-block"><i data-lucide="twitter" class="h-6 w-6"></i></a>
+                                <a href="#" class="text-brand-200 hover:text-white transition hover:-translate-y-1 inline-block"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
+                                <a href="#" class="text-brand-200 hover:text-white transition hover:-translate-y-1 inline-block"><i data-lucide="instagram" class="h-6 w-6"></i></a>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact Form (With Netlify forms functional attributes) -->
+                        <div class="p-10 lg:p-16" data-aos="fade-left" data-aos-delay="200">
+                            <form name="contact" method="POST" data-netlify="true" class="space-y-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                                        <input type="text" name="first_name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                                        <input type="text" name="last_name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Work Email</label>
+                                    <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Company Website</label>
+                                    <input type="url" name="website" placeholder="https://" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition">
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">How can we help?</label>
+                                    <textarea name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="w-full bg-brand-600 text-white font-bold py-4 px-8 rounded-lg hover:bg-brand-700 transition hover:-translate-y-1 shadow-lg">
+                                    Request Free Audit
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <i data-lucide="trending-up" class="h-6 w-6 text-brand-500 mr-2"></i>
+                        <span class="font-bold text-xl tracking-tight text-white">Apex<span class="text-brand-500">Digital</span></span>
+                    </div>
+                    <p class="text-sm mb-4 max-w-sm">The premier digital growth agency for brands ready to scale aggressively and dominate their market share.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><button onclick="navigate('home')" class="hover:text-brand-400 transition hover:translate-x-1 inline-block">Home</button></li>
+                        <li><button onclick="navigate('services')" class="hover:text-brand-400 transition hover:translate-x-1 inline-block">Services</button></li>
+                        <li><button onclick="navigate('about')" class="hover:text-brand-400 transition hover:translate-x-1 inline-block">About Us</button></li>
+                        <li><button onclick="navigate('portfolio')" class="hover:text-brand-400 transition hover:translate-x-1 inline-block">Portfolio</button></li>
+                        <li><button onclick="navigate('blog')" class="hover:text-brand-400 transition hover:translate-x-1 inline-block">Insights</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-brand-400 transition">SEO & Content</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition">PPC Advertising</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition">Social Media</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition">Email Marketing</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-center md:text-left">
+                <p>&copy; 2026 Apex Digital Agency. All rights reserved.</p>
+                <a href="/admin/" class="mt-4 md:mt-0 inline-block text-gray-500 hover:text-white transition">Client Login</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Script for Navigation & Icons -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Initialize AOS animations
+        AOS.init({
+            duration: 800,
+            once: true, // Whether animation should happen only once
+            offset: 50, // offset (in px) from the original trigger point
+            easing: 'ease-in-out',
+        });
+
+        // Single Page Navigation Logic
+        function navigate(pageId) {
+            // Hide all sections
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // Remove active state from all desktop nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show target section
+            document.getElementById(pageId).classList.add('active');
+            
+            // Set active state on clicked nav link (excluding the 'Contact' and 'Single Post' buttons)
+            if(pageId !== 'contact' && pageId !== 'single-post') {
+                const activeLinks = document.querySelectorAll(`button[onclick="navigate('${pageId}')"].nav-link`);
+                activeLinks.forEach(link => link.classList.add('active'));
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Refresh AOS animations so elements load in properly on the new page view
+            setTimeout(() => {
+                AOS.refresh();
+            }, 100);
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
+        // --- BLOG DATA FETCHING LOGIC ---
+        let globalPosts = [];
+
+        async function initBlog() {
+            try {
+                // This tries to fetch the JSON file that Decap CMS will generate
+                const response = await fetch('/data/blog.json');
+                if(!response.ok) throw new Error('CMS data not found yet');
+                
+                const data = await response.json();
+                globalPosts = data.posts || [];
+            } catch (error) {
+                // If the client hasn't published anything yet (or before setup), show these beautiful placeholders!
+                globalPosts = [
+                    {
+                        title: "The 2026 Guide to B2B Lead Generation",
+                        summary: "Discover the exact frameworks we use to drop CPA by 40% for our SaaS clients.",
+                        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        date: "2026-02-28T12:00:00Z",
+                        content: "## The Landscape is Changing \n\nIn 2026, standard lead magnets are no longer enough. You need **interactive assets**.\n\nHere is how we do it..."
+                    },
+                    {
+                        title: "Why Your Meta Ads Are Failing",
+                        summary: "Are your ad costs skyrocketing? You might be making one of these three critical scaling mistakes.",
+                        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        date: "2026-02-15T12:00:00Z",
+                        content: "## The Algorithm Shift \n\nMeta relies heavily on machine learning now. Stop micro-targeting and let the algorithm do the heavy lifting."
+                    },
+                    {
+                        title: "SEO vs PPC: Where to Invest First",
+                        summary: "A breakdown of how to allocate your initial marketing budget for maximum short and long-term ROI.",
+                        image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        date: "2026-01-30T12:00:00Z",
+                        content: "## The Ultimate Debate\n\nShort answer: You need both. But you should *start* with PPC to validate your offers before investing in 6 months of SEO."
+                    }
+                ];
+            }
+            renderBlogGrid();
+        }
+
+        function renderBlogGrid() {
+            const grid = document.getElementById('blog-grid');
+            grid.innerHTML = ''; // Clear loading state
+            
+            globalPosts.forEach((post, index) => {
+                // Format date nicely
+                const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = new Date(post.date).toLocaleDateString(undefined, dateOptions);
+
+                grid.innerHTML += `
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group flex flex-col h-full" onclick="viewPost(${index})">
+                        <div class="h-48 overflow-hidden shrink-0">
+                            <img src="${post.image}" alt="${post.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <p class="text-sm text-brand-600 font-semibold mb-2">${formattedDate}</p>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-600 transition-colors">${post.title}</h3>
+                            <p class="text-gray-600 mb-4 text-sm flex-grow">${post.summary}</p>
+                            <span class="text-brand-600 font-medium text-sm flex items-center mt-auto">Read Article <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i></span>
+                        </div>
+                    </div>
+                `;
+            });
+            lucide.createIcons(); // Re-initialize icons for newly added HTML
+        }
+
+        function viewPost(index) {
+            const post = globalPosts[index];
+            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+            
+            document.getElementById('post-title').innerText = post.title;
+            document.getElementById('post-date').innerText = new Date(post.date).toLocaleDateString(undefined, dateOptions);
+            document.getElementById('post-image').src = post.image;
+            
+            // Parse markdown using marked.js
+            document.getElementById('post-body').innerHTML = marked.parse(post.content);
+
+            navigate('single-post');
+        }
+
+        // Initialize blog fetch on page load
+        window.addEventListener('DOMContentLoaded', initBlog);
+
+        // --- NETLIFY IDENTITY LOGIN REDIRECT ---
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
