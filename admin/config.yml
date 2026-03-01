@@ -1,0 +1,22 @@
+backend:
+  name: git-gateway
+  branch: main
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+collections:
+  - name: "blog"
+    label: "Insights Blog"
+    files:
+      - label: "Manage Blog Posts"
+        name: "posts"
+        file: "data/blog.json"
+        fields:
+          - label: "Articles"
+            name: "posts"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Short Summary", name: "summary", widget: "text"}
+              - {label: "Featured Image URL", name: "image", widget: "string", default: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
+              - {label: "Publish Date", name: "date", widget: "datetime"}
+              - {label: "Full Article Content", name: "content", widget: "markdown"}
